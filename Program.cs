@@ -224,9 +224,119 @@ namespace SzabadulasASzobabol
                     case "help":
                         Help();
                         break;
-                }
 
+                    #region húzd
+
+                    case "húzd":
+                        switch (bevitelek[1])
+                        {
+                            case "szekrény":
+                                Console.WriteLine("A szekrényt elhúztad, mögötte egy ablakot látsz");
+                                targy[0].Elhuzva();
+                                targy[0].Aktivalva();
+                                break;
+                            default:
+                                Console.WriteLine($"a(z) {bevitelek[1]} nem elhúzható");
+                                break;
+                        }
+                        break;
+
+                    #endregion
+
+                    #region leltar
+                    case "leltar":
+                        Console.WriteLine("Nálad van:");
+                        for (int i = 0; i < targy.Length; i++)
+                        {
+                            if (targy[i].MelyikSzoba() == "taska")
+                            {
+                                Console.WriteLine(targy[i].TargyNeve());
+                            }
+                        }
+                        break;
+                    #endregion
+
+                    #region menj
+
+                    case "menj":
+                        if (helyseg[0].IttVagyokE() == true)
+                        {
+                            switch (bevitelek[1])
+                            {
+                                case "észak":
+                                    if (targy[2].Aktive() == true)
+                                    {
+                                        Console.WriteLine("Gratulálok, megszöktél");
+                                        gyozelem = true;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Északra nincs kijárat.");
+                                    }
+                                    break;
+
+                                case "dél":
+                                    Console.WriteLine("Délre nincs kijárat");
+                                    break;
+
+                                case "kelet":
+                                    if (targy[1].Aktive() == true)
+                                    {
+                                        Console.WriteLine("A fürdőszobába jutottál");
+                                        helyseg[0].SzobaValtas();
+                                        helyseg[1].SzobaValtas();
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Az ajtó zárva van, kulcsot kéne találnod");
+                                    }
+                                    break;
+
+                                case "nyugat":
+                                    Console.WriteLine("Nyugatra nincs kijárat");
+                                    break;
+
+                                default:
+                                    Console.WriteLine($"Erre nem tudok menni: {bevitelek[1]}");
+                                    break;
+                            }
+
+
+                        }
+                        else if (helyseg[1].IttVagyokE() == true)
+                        {
+                            switch (bevitelek[1])
+                            {
+                                case "észak":
+                                    Console.WriteLine("Északra nincs kijárat.");
+                                    break;
+
+                                case "dél":
+                                    Console.WriteLine("Délre nincs kijárat");
+                                    break;
+
+                                case "nyugat":
+                                    Console.WriteLine("A szobaba jutottál");
+                                    helyseg[0].SzobaValtas();
+                                    helyseg[1].SzobaValtas();
+                                    break;
+
+                                case "kelet":
+                                    Console.WriteLine("keletre nincs kijárat");
+                                    break;
+
+                                default:
+                                    Console.WriteLine($"erre nem tudok menni: {bevitelek[1]}");
+                                    break;
+                            }
+                        }
+                        break;
+                        #endregion
+
+                }
                 #endregion
+
+
             }
 
             Console.ReadLine();
