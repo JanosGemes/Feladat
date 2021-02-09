@@ -164,7 +164,7 @@ namespace SzabadulasASzobabol
                                 "\nha magától nem nyitható akkor be kell írni mivel szeretnéd nyitni pl.:\"nyisd ablak kulcs\")" +
                                 "\nhúzd (A \"húzd\" utasítás után megfelelő tárgyat beírva elhúzhatók pl.:\"húzd ágy\")" +
                                 "\ntörd (A \"törd\" utasítás után megfelelő tárgyat beírva, fel tudod törni azt pl.:\"törd szekrény\")" +
-                                "\nleltar (A \"leltar\" utasítás után kilistázza a táskádban lévő dolgokat pl.:\"leltar\")");
+                                "\nleltár (A \"leltar\" utasítás után kilistázza a táskádban lévő dolgokat pl.:\"leltár\")");
 
         }
 
@@ -212,6 +212,37 @@ namespace SzabadulasASzobabol
 
                 #endregion
 
+                #region csere
+                string helyettes;
+                if (bevitelek[1] == "kulcs" && bevitelek[2] == "ajtó")
+                {
+                    helyettes = bevitelek[1];
+                    bevitelek[1] = bevitelek[2];
+                    bevitelek[2] = helyettes;
+
+                }
+                else if (bevitelek[1] == "feszítővas" && bevitelek[2] == "ablak")
+                {
+                    helyettes = bevitelek[1];
+                    bevitelek[1] = bevitelek[2];
+                    bevitelek[2] = helyettes;
+                }
+
+                else if (bevitelek[2] == "fel")
+                {
+                    helyettes = bevitelek[1];
+                    bevitelek[1] = bevitelek[2];
+                    bevitelek[2] = helyettes;
+                }
+                else if (bevitelek[2] == "le")
+                {
+                    helyettes = bevitelek[1];
+                    bevitelek[1] = bevitelek[2];
+                    bevitelek[2] = helyettes;
+                }
+
+                #endregion
+
                 #region parancsok
 
                 switch (bevitelek[0])
@@ -224,18 +255,24 @@ namespace SzabadulasASzobabol
                     #region törd
                     case "törd":
                         switch (bevitelek[1])
-                        {
+                        {  
                             case "ablak":
+                               
                                 switch (bevitelek[2])
                                 {
                                     case "feszítővas":
-                                        if (targy[0].Aktive() == true && targy[5].MelyikSzoba() == "taska")
+                                        if (targy[6].Aktive() == true && targy[0].Aktive() == true && targy[5].MelyikSzoba() == "taska")
                                         {
                                             Console.WriteLine("A(z) " + targy[2].TargyNeve() + "-ot felfeszítetted, mostmár északra kijuthatsz");
                                             targy[2].Aktivalva();
                                         }
+                                        else if (targy[6].Aktive() == true && targy[5].MelyikSzoba() != "taska")
+                                        {
+                                            Console.WriteLine("Nincs nálad a feszítővas");
+                                        }
                                         break;
                                     default:
+                                        Console.WriteLine("A(z) " + bevitelek[1] + " nem tudom törni, valami tárgy kellene hozzá");
                                         break;
                                 }
                                 break;
@@ -268,7 +305,7 @@ namespace SzabadulasASzobabol
                     #endregion
 
                     #region leltar
-                    case "leltar":
+                    case "leltár":
                         Console.WriteLine("Nálad van:");
                         for (int i = 0; i < targy.Length; i++)
                         {
@@ -407,11 +444,11 @@ namespace SzabadulasASzobabol
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Az ajtót nem tudtad kinyitni zárva van");
+                                            Console.WriteLine("Az ajtót nem tudtad kinyitni, próbáld kulccsal");
                                         }
                                         break;
                                     default:
-                                        Console.WriteLine("Az ajtót nem tudtad kinyitni zárva van");
+                                        Console.WriteLine("Az ajtót nem tudtad kinyitni zárva van, próbáld kulccsal");
                                         break;
                                 }
 
@@ -537,6 +574,90 @@ namespace SzabadulasASzobabol
 
                     #endregion
 
+                    #region tedd le
+                    case "tedd":
+                        switch (bevitelek[1])
+                        {
+                            case "le":
+                                switch (bevitelek[2])
+                                {
+                                    case "kulcs":
+                                        if (targy[3].Aktive() == true && targy[4].MelyikSzoba() == "taska")
+                                        {
+                                            Console.WriteLine("a kulcsot letetted");
+                                            if (helyseg[0].IttVagyokE() == true)
+                                            {
+                                                targy[4].LetetelSzoba();
+                                            }
+                                            else
+                                            {
+                                                targy[4].LetetelFurdoszoba();
+                                            }
+
+                                        }
+                                        else if (targy[3].Aktive() == true && targy[4].MelyikSzoba() != "taska")
+                                        {
+                                            Console.WriteLine("A kulcsot nincs nálad");
+                                        }
+
+
+                                        break;
+                                    case "doboz":
+                                        if (targy[0].Aktive() == true && targy[3].MelyikSzoba() == "taska")
+                                        {
+                                            Console.WriteLine("a dobozt letetted");
+                                            if (helyseg[0].IttVagyokE() == true)
+                                            {
+                                                targy[3].LetetelSzoba();
+                                            }
+                                            else
+                                            {
+                                                targy[3].LetetelFurdoszoba();
+                                            }
+
+                                        }
+                                        else if (targy[0].Aktive() == true && targy[3].MelyikSzoba() != "taska")
+                                        {
+                                            Console.WriteLine("a doboz már nincs nálad");
+                                        }
+
+
+                                        break;
+
+
+                                    case "feszítővas":
+                                        if (targy[6].Aktive() == true && targy[5].MelyikSzoba() == "taska")
+                                        {
+                                            Console.WriteLine("a feszítővasat letetted");
+                                            if (helyseg[0].IttVagyokE() == true)
+                                            {
+                                                targy[5].LetetelSzoba();
+                                            }
+                                            else
+                                            {
+                                                targy[5].LetetelFurdoszoba();
+                                            }
+
+                                        }
+                                        else if (targy[0].Aktive() == true && targy[5].MelyikSzoba() != "taska")
+                                        {
+
+                                            Console.WriteLine("a feszítővas nincs nálad");
+                                        }
+                                        break;
+                                    default:
+                                        Console.WriteLine($"nem tudom felvenni: {bevitelek[2]}");
+                                        break;
+                                }
+                                break;
+                            default:
+                                Console.WriteLine("Adj meg egy helyes parancsot");
+                                break;
+                        }
+                        break;
+
+                    #endregion
+
                     #region nézd
 
                     case "nézd":
@@ -560,16 +681,21 @@ namespace SzabadulasASzobabol
                                     break;
 
                                 case "ablak":
-                                    if (targy[0].MelyikSzoba() == "elhúzva")
+                                    if (targy[0].MelyikSzoba() == "elhúzva" && targy[2].Aktive() == false)
                                     {
                                         targy[2].NezdTargy();
-                                        break;
+                                        
+                                    }
+                                    else if (targy[2].Aktive() == true)
+                                    {
+                                        Console.WriteLine(" Az ablak betört ki tudsz rajta jutni");
                                     }
                                     else
                                     {
                                         Console.WriteLine("Nem látok " + targy[2].TargyNeve() + "-ot");
-                                        break;
+                                        
                                     }
+                                    break;
 
                                 case "doboz":
                                     if (targy[3].MelyikSzoba() == "szoba" || targy[3].MelyikSzoba() == "taska")
@@ -577,19 +703,20 @@ namespace SzabadulasASzobabol
                                         if (targy[0].Aktive() == true)
                                         {
                                             Console.WriteLine("Ez egy kézzel nyitható doboz");
-                                            break;
+                                            
                                         }
                                         else
                                         {
                                             Console.WriteLine("Nem látsz " + targy[3].TargyNeve() + "-t");
-                                            break;
+                                            
                                         }
                                     }
                                     else
                                     {
                                         Console.WriteLine("Nem látom a dobozt");
-                                        break;
+                                        
                                     }
+                                    break;
 
                                 case "kulcs":
                                     if (targy[4].MelyikSzoba() == "szoba" || targy[4].MelyikSzoba() == "taska")
@@ -597,19 +724,20 @@ namespace SzabadulasASzobabol
                                         if (targy[3].Aktive() == true)
                                         {
                                             targy[4].NezdTargy();
-                                            break;
+                                            
                                         }
                                         else
                                         {
                                             Console.WriteLine("Nem látsz " + targy[4].TargyNeve() + "-ot");
-                                            break;
+                                            
                                         }
                                     }
                                     else
                                     {
                                         Console.WriteLine("Nem látom a kulcsot");
-                                        break;
+                                        
                                     }
+                                    break;
 
                                 case "feszítővas":
                                     if (targy[5].MelyikSzoba() == "szoba" || targy[5].MelyikSzoba() == "taska")
@@ -617,19 +745,20 @@ namespace SzabadulasASzobabol
                                         if (targy[6].Aktive() == true)
                                         {
                                             targy[5].NezdTargy();
-                                            break;
+                                            
                                         }
                                         else
                                         {
                                             Console.WriteLine("Nem látsz " + targy[5].TargyNeve() + "-ot");
-                                            break;
+                                          
                                         }
                                     }
                                     else
                                     {
                                         Console.WriteLine("Nem látom a feszítővasat");
-                                        break;
+                                       
                                     }
+                                    break;
                                 default:
                                     helyseg[0].SzobaNézd();
                                     break;
