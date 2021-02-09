@@ -36,11 +36,33 @@ namespace SzabadulasASzobabol
         {
             hely = "taska";
             return hely;
+        }
+
+        public string LetetelSzoba()
+        {
+            hely = "szoba";
+            return hely;
         
         }
 
-        
+        public string LetetelFurdoszoba()
+        {
+            hely = "fürdőszoba";
+            return hely;
+        }
 
+        public bool Aktivalva()
+        {
+            aktivalva = true;
+            return aktivalva;
+        }
+
+        public string Elhuzva()
+        {
+            hely = "elhúzva";
+            return hely;
+
+        }
     }
         class Program
     {
