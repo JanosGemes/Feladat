@@ -150,18 +150,22 @@ namespace SzabadulasASzobabol
     {
         static void Koszones()
         {
-            Console.WriteLine("Üdvözöllek! \nEz a játék a Szabadulás a szobából! \nA nappaliban állsz és ki kell jutnod! \nA help szót beírva kiírja milyen parancsokat hajthatsz végre! \nJó szórakozást! ");
+            Console.WriteLine("Üdvözöllek! \nEz a játék a Szabadulás a szobából! \nEgy szobában állsz és ki kell jutnod! \nA help szót beírva kiírja milyen parancsokat hajthatsz végre! \nJó szórakozást! ");
         }
+
+
+        
+
 
         static void Help()
         {
-            Console.WriteLine("A végrehajtandó cselekedetek: \nmenj (\"menj\" utasítás után égtájat tudsz beírni (észak, kelet, nyugat, dél) pl.: \"menj észak\" )" +
-                                "\nnézd (A nézd utasítás tárggyal használva a tárgyról ad rövid leírást. pl.:\"nézd ágy\"" +
-                                "\nA sima nézd utasítással szobát vizsgálod meg pl.:\"nézd\") " +
+            Console.WriteLine("A végrehajtandó cselekedetek: \nA menj (\"menj\" utasítás után égtájat tudsz beírni (észak, kelet, nyugat, dél) pl.: \"menj észak\" )" +
+                                "\nnézd (A \"nézd\" utasítás tárggyal használva a tárgyról ad rövid leírást. pl.:\"nézd ágy\"" +
+                                "\nA sima nézd utasítással a szobát vizsgálod meg pl.:\"nézd\") " +
                                 "\nvedd fel(A \"vedd fel\" utasítás után tárgyakat írhatsz be és bekerül a táskádba pl.: \"vedd fel kulcs\") " +
                                 "\ntedd le (A \"tedd le\" utasítás után tárgyakat írhatsz be és kikerül a táskádból a szobába pl.: \"tedd le kulcs\")" +
                                 "\nnyisd (A \"nyisd\" utasítás után megfelelő tárgyakat használva kinyilnak pl.:\"nyisd ajtó\", " +
-                                "\n ha magától nem nyitható akkor be kell írni mivel szeretnéd nyitni pl.:\"nyisd ablak kulcs\")" +
+                                "\nha magától nem nyitható akkor be kell írni mivel szeretnéd nyitni pl.:\"nyisd ablak kulcs\")" +
                                 "\nhúzd (A \"húzd\" utasítás után megfelelő tárgyat beírva elhúzhatók pl.:\"húzd ágy\")" +
                                 "\ntörd (A \"törd\" utasítás után megfelelő tárgyat beírva, fel tudod törni azt pl.:\"törd szekrény\")" +
                                 "\nleltar (A \"leltar\" utasítás után kilistázza a táskádban lévő dolgokat pl.:\"leltar\")");
@@ -195,6 +199,35 @@ namespace SzabadulasASzobabol
 
             Koszones();
 
+            bool gyozelem = false;
+            while (gyozelem != true)
+            {
+                #region Bevitel
+
+                string[] bevitelek = new string[10];
+                string bevitel = Console.ReadLine();
+                string[] szoveg = bevitel.Split(' ');
+                int x = 0;
+                foreach (var szo in szoveg)
+                {
+                    bevitelek[x] = szo;
+                    x++;
+                }
+
+                #endregion
+
+                #region parancsok
+
+                switch (bevitelek[0])
+                {
+
+                    case "help":
+                        Help();
+                        break;
+                }
+
+                #endregion
+            }
 
             Console.ReadLine();
         }
