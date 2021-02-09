@@ -19,7 +19,6 @@ namespace SzabadulasASzobabol
         public bool Aktive()
         {
             return this.aktivalva;
-        
         }
 
         public string MelyikSzoba()
@@ -41,8 +40,7 @@ namespace SzabadulasASzobabol
         public string LetetelSzoba()
         {
             hely = "szoba";
-            return hely;
-        
+            return hely;     
         }
 
         public string LetetelFurdoszoba()
@@ -63,6 +61,40 @@ namespace SzabadulasASzobabol
             return hely;
 
         }
+
+        public void NezdTargy()
+        {
+            switch (nev)
+            {
+                case "szekrény":
+                    Console.WriteLine("A nappaliban található szekrény kézzel nyitható ");
+                    break;
+                case "ágy":
+                    Console.WriteLine("Ez egy közönséges ágy.");
+                    break;
+                case "ajtó":
+                    Console.WriteLine("Keletre van egy ajtó, kulccsal nyitható");
+                    break;
+                case "kád":
+                    Console.WriteLine("A kádban egy feszítővasat látsz.");
+                    break;
+                case "ablak":
+                    Console.WriteLine("Be van zárva, kézzel nem lehet betörni");
+                    break;
+                case "kulcs":
+                    Console.WriteLine("Ez egy kulcs, valószínű zárat nyit");
+                    break;
+                case "doboz":
+                    Console.WriteLine("Kis nyitható doboznak tűnik");
+                    break;
+                case "feszítővas":
+                    Console.WriteLine("szerszám, ezzel talán ki tudsz jutni");
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
         class Program
     {
