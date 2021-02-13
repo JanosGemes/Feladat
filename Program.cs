@@ -148,6 +148,14 @@ namespace SzabadulasASzobabol
 
     class Program
     {
+        static void Csere( ref string elso, ref string masodik)
+        {
+            string seged;
+            seged = elso;
+            elso = masodik;
+            masodik = seged;
+        }
+
         static void Koszones()
         {
             Console.WriteLine("Üdvözöllek! \nEz a játék a Szabadulás a szobából! \nEgy szobában állsz és ki kell jutnod! \nA help szót beírva kiírja milyen parancsokat hajthatsz végre! \nJó szórakozást! ");
@@ -213,32 +221,23 @@ namespace SzabadulasASzobabol
                 #endregion
 
                 #region csere
-                string helyettes;
+               
                 if (bevitelek[1] == "kulcs" && bevitelek[2] == "ajtó")
                 {
-                    helyettes = bevitelek[1];
-                    bevitelek[1] = bevitelek[2];
-                    bevitelek[2] = helyettes;
-
+                    Csere(ref bevitelek[1], ref bevitelek[2]);
                 }
                 else if (bevitelek[1] == "feszítővas" && bevitelek[2] == "ablak")
                 {
-                    helyettes = bevitelek[1];
-                    bevitelek[1] = bevitelek[2];
-                    bevitelek[2] = helyettes;
+                    Csere(ref bevitelek[1], ref bevitelek[2]);
                 }
 
                 else if (bevitelek[2] == "fel")
                 {
-                    helyettes = bevitelek[1];
-                    bevitelek[1] = bevitelek[2];
-                    bevitelek[2] = helyettes;
+                    Csere(ref bevitelek[1], ref bevitelek[2]);
                 }
                 else if (bevitelek[2] == "le")
                 {
-                    helyettes = bevitelek[1];
-                    bevitelek[1] = bevitelek[2];
-                    bevitelek[2] = helyettes;
+                    Csere(ref bevitelek[1], ref bevitelek[2]);
                 }
 
                 #endregion
