@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace SzabadulasASzobabol
 {
+    
     public class Targy
     {
         int sorszam;
@@ -176,6 +179,23 @@ namespace SzabadulasASzobabol
 
         }
 
+        static void KiirtTxtTorles()
+        {
+
+            StreamWriter szoveg = new StreamWriter("../../../mentes.sav");
+            szoveg.WriteLine();
+            szoveg.Close();
+        }
+
+        static void KiirTxt(string elso, string masodik, string harmadik)
+        {
+           
+            StreamWriter szoveg = new StreamWriter("../../../mentes.sav", true);
+            szoveg.WriteLine(elso + " " + masodik + " " + harmadik);
+            
+            szoveg.Close();
+        }
+
         static void Main(string[] args)
         {
             #region helységek, tárgyak
@@ -201,10 +221,12 @@ namespace SzabadulasASzobabol
 
             #endregion
 
-            Koszones();
+           // KiirtTxtTorles();
 
+            Koszones();
+  
             bool gyozelem = false;
-            while (gyozelem != true)
+            while (gyozelem != true )
             {
                 #region Bevitel
 
@@ -220,8 +242,21 @@ namespace SzabadulasASzobabol
 
                 #endregion
 
+                #region Kiírás Txt
+                try
+                {
+                    KiirTxt(bevitelek[0], bevitelek[1], bevitelek[2]);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    Console.ReadKey();
+                    throw;
+                }
+                #endregion
+
                 #region csere
-               
+
                 if (bevitelek[1] == "kulcs" && bevitelek[2] == "ajtó")
                 {
                     Csere(ref bevitelek[1], ref bevitelek[2]);
@@ -250,7 +285,8 @@ namespace SzabadulasASzobabol
                     case "help":
                         Help();
                         break;
-
+ 
+                        
                     #region törd
                     case "törd":
                         switch (bevitelek[1])
@@ -483,7 +519,7 @@ namespace SzabadulasASzobabol
                                             }
                                             else
                                             {
-                                                Console.WriteLine(" nem tudom felvenni");
+                                                Console.WriteLine("nincs a szobában, nem tudod felvenni");
                                             }
 
                                         }
@@ -493,7 +529,7 @@ namespace SzabadulasASzobabol
                                         }
                                         else
                                         {
-                                            Console.WriteLine("nem tudom felvenni");
+                                            Console.WriteLine("nem látod a kulcsot, nem tudod felvenni");
                                         }
                                         break;
 
@@ -512,7 +548,7 @@ namespace SzabadulasASzobabol
                                             }
                                             else
                                             {
-                                                Console.WriteLine("nem tudom felvenni");
+                                                Console.WriteLine("nincs a szobában, nem tudod felvenni");
                                             }
                                         }
                                         else if (targy[0].Aktive() == true && targy[3].MelyikSzoba() == "taska")
@@ -548,7 +584,7 @@ namespace SzabadulasASzobabol
                                             }
                                             else
                                             {
-                                                Console.WriteLine("nem tudom felvenni");
+                                                Console.WriteLine("nincs a szobában, nem tudod felvenni");
                                             }
                                         }
                                         else if (targy[6].Aktive() == true && targy[5].MelyikSzoba() == "taska")
@@ -557,7 +593,7 @@ namespace SzabadulasASzobabol
                                         }
                                         else
                                         {
-                                            Console.WriteLine("nem tudom felvenni");
+                                            Console.WriteLine("nem látod a feszítővasat, nem tudod felvenni");
                                         }
                                         break;
                                     default:
@@ -596,7 +632,7 @@ namespace SzabadulasASzobabol
                                         }
                                         else if (targy[3].Aktive() == true && targy[4].MelyikSzoba() != "taska")
                                         {
-                                            Console.WriteLine("A kulcsot nincs nálad");
+                                            Console.WriteLine("A kulcs nincs nálad");
                                         }
 
 
@@ -863,6 +899,7 @@ namespace SzabadulasASzobabol
 
             }
 
+            
             Console.ReadLine();
         }
     }
