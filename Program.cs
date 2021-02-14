@@ -19,52 +19,52 @@ namespace SzabadulasASzobabol
             this.aktivalva = aktivalva;
         }
 
-        public bool Aktive()
+        public bool Aktive()            // megvizsgálja a tárgy aktiváltságát(használtuk-e már)
         {
             return this.aktivalva;
         }
 
-        public string MelyikSzoba()
+        public string MelyikSzoba()     // megadja a tárgy helyét
         {
             return this.hely;
         }
 
-        public string TargyNeve()
+        public string TargyNeve()       // megadja a tárgy nevét
         {
             return this.nev;
         }
 
-        public string Felvetel()
+        public string Felvetel()        // a tárgy helyét módosítja, a táskába kerül
         {
             hely = "taska";
             return hely;
         }
 
-        public string LetetelSzoba()
+        public string LetetelSzoba()    // a tárgy helyét módosítja, bekerül a szobába
         {
             hely = "szoba";
             return hely;
         }
 
-        public string LetetelFurdoszoba()
+        public string LetetelFurdoszoba()   // a tárgy helyét módosítja, bekerül a fürdőszobába
         {
             hely = "fürdőszoba";
             return hely;
         }
 
-        public bool Aktivalva()
+        public bool Aktivalva()     // a tárgyat aktiválja(használathoz), értékét true-ra módosítja
         {
             aktivalva = true;
             return aktivalva;
         }
 
-        public string Elhuzva()
+        public string Elhuzva()     // tárgy helyét módosítja(szekrény)
         {
             hely = "elhúzva";
             return hely;
         }
 
-        public void NezdTargy()
+        public void NezdTargy()     //egy tárgyról ad leírást
         {
             switch (nev)
             {
@@ -97,14 +97,14 @@ namespace SzabadulasASzobabol
             }
         }
 
-        public string HelyValt
+        public string HelyValt      //betöltéshez, a tárgy helyét tölti vissza
         {
             set
             {
                 hely = value;
             }
         }
-        public bool AtivalasValt
+        public bool AtivalasValt    //betöltéshez, a tárgy aktiválását tölti vissza
         {
             set
             {
@@ -125,17 +125,17 @@ namespace SzabadulasASzobabol
             this.jelenlet = jelenlet;
         }
 
-        public string SzobaNeve()
+        public string SzobaNeve()       // a szoba nevét adja vissza
         {
             return this.szobaNeve;
         }
 
-        public bool SzobaAktivitas()
+        public bool SzobaAktivitas()    // megvizsgálja a helységet, true vagy false add vissza
         {
             return this.jelenlet;
         }
 
-        public bool SzobaValtas()
+        public bool SzobaValtas()       // szobák közti mozgáshoz szükséges, szobaváltás során megváltoztatja a true vagy false értéket
         {
 
             if (jelenlet == true)
@@ -151,12 +151,12 @@ namespace SzabadulasASzobabol
 
         }
 
-        public bool IttVagyokE()
+        public bool IttVagyokE()        //visszaadja, a szoba jelentét rétékét, ha true a szobában tartózkodik a karakter
         {
             return jelenlet;
         }
 
-        public void SzobaNézd()
+        public void SzobaNézd()         // szobák vizsgálata nézd paranccsal
         {
             switch (szobaNeve)
             {
@@ -173,7 +173,7 @@ namespace SzabadulasASzobabol
             }
         }
 
-        public bool JelenletValt
+        public bool JelenletValt        // betöltéshez, szobák true és false értékét tölti vissza
         {
             set
             {
@@ -190,7 +190,7 @@ namespace SzabadulasASzobabol
             seged = elso;
             elso = masodik;
             masodik = seged;
-        }
+        }  // hibajavításhoz, megcseréli a bevitt szavakat
 
         static void Koszones()
         {
@@ -208,7 +208,9 @@ namespace SzabadulasASzobabol
                                 "\nha magától nem nyitható akkor be kell írni mivel szeretnéd nyitni pl.:\"nyisd ablak kulcs\")" +
                                 "\nhúzd (A \"húzd\" utasítás után megfelelő tárgyat beírva elhúzhatók pl.:\"húzd ágy\")" +
                                 "\ntörd (A \"törd\" utasítás után megfelelő tárgyat beírva, fel tudod törni azt pl.:\"törd szekrény\")" +
-                                "\nleltár (A \"leltar\" utasítás után kilistázza a táskádban lévő dolgokat pl.:\"leltár\")");
+                                "\nleltár (A \"leltar\" utasítás után kilistázza a táskádban lévő dolgokat pl.:\"leltár\")" +
+                                "\nmentés (A \"mentés\" parancs hatására kimenti a játék állását)" +
+                                "\nbetöltés (A \"betöltés\" parancs visszatölti a korábban lementett adatokat)");
 
         }
 
@@ -242,7 +244,7 @@ namespace SzabadulasASzobabol
             while (gyozelem != true)
             {
 
-                #region bevitel
+                #region bevitel     // kéri a parancsokat, majd feldarabolja
 
                 string[] bevitelek = new string[10];
                 string bevitel = Console.ReadLine();
@@ -254,9 +256,9 @@ namespace SzabadulasASzobabol
                     x++;
                 }
 
-                #endregion
+                #endregion                  
 
-                #region csere
+                #region csere         // hibajavítás, ha nem megfelelő sorrendben vannak a bevitt szavak kicseréli őket
 
                 if (bevitelek[1] == "kulcs" && bevitelek[2] == "ajtó")
                 {
@@ -278,7 +280,7 @@ namespace SzabadulasASzobabol
 
                 #endregion
 
-                #region parancsok
+                #region parancsok   // megvizsgálja a bevitt szavakat sorban és eldönti melyik parancs fusson le
 
                 switch (bevitelek[0])
                 {
@@ -287,7 +289,7 @@ namespace SzabadulasASzobabol
                         Help();
                         break;
 
-                    #region mentés
+                    #region mentés      // a tárgyak és helyek állapotát, és a mozgathatók helyét menti ki mentes.sav-ba
 
                     case "mentés":
                         try
@@ -312,7 +314,7 @@ namespace SzabadulasASzobabol
 
                     #endregion
 
-                    #region betöltés
+                    #region betöltés     // a tárgyak, helyek állapotát, és a mozgathatók helyét tölti vissza
 
                     case "betöltés":
                         try
@@ -350,7 +352,7 @@ namespace SzabadulasASzobabol
 
                     #endregion
 
-                    #region törd
+                    #region törd    // ablakhoz, törd parancs
                     case "törd":
                         switch (bevitelek[1])
                         {
@@ -382,9 +384,9 @@ namespace SzabadulasASzobabol
                         }
                         break;
 
-                    #endregion
+                    #endregion      
 
-                    #region húzd
+                    #region húzd        // szekrényhez, húzd parancs
 
                     case "húzd":
                         switch (bevitelek[1])
@@ -402,7 +404,7 @@ namespace SzabadulasASzobabol
 
                     #endregion
 
-                    #region leltar
+                    #region leltar      // kiírja a taska hellyel rendelkező tárgyakat
                     case "leltár":
                         Console.WriteLine("Nálad van:");
                         for (int i = 0; i < targy.Length; i++)
@@ -415,7 +417,7 @@ namespace SzabadulasASzobabol
                         break;
                     #endregion
 
-                    #region menj
+                    #region menj // szobák közti mozgásához szükséges
 
                     case "menj":
                         if (helyseg[0].IttVagyokE() == true)
@@ -492,7 +494,7 @@ namespace SzabadulasASzobabol
                         break;
                     #endregion
 
-                    #region nyisd
+                    #region nyisd  // nyitható tárgyakhoz nyisd parancs
                     case "nyisd":
                         switch (bevitelek[1])
                         {
@@ -564,7 +566,7 @@ namespace SzabadulasASzobabol
 
                     #endregion
 
-                    #region vedd fel
+                    #region vedd fel    // tárgyak felvétele
                     case "vedd":
                         switch (bevitelek[1])
                         {
@@ -676,7 +678,7 @@ namespace SzabadulasASzobabol
 
                     #endregion
 
-                    #region tedd le
+                    #region tedd le     // tárgyak letétele
                     case "tedd":
                         switch (bevitelek[1])
                         {
@@ -760,7 +762,7 @@ namespace SzabadulasASzobabol
 
                     #endregion
 
-                    #region nézd
+                    #region nézd   // megvizsgálja a szobákat, tárgyakat
 
                     case "nézd":
 
